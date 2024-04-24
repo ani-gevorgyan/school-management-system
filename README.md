@@ -1,8 +1,9 @@
-# File-Management-System
+# School-Management-System
 
 This is a simple school system management application. This application uses Graphql Api for data fetching and data mutation. <br />
-The application uses prisma ORM for interacting with MySql database.
-You can find all the necessary env variables in the .env.example file.
+The application uses RestApi for authentication (signup, login). These requests are provided below in the postman link. <br />
+The application uses prisma ORM for interacting with MySql database.<br />
+You can find all the necessary env variables in the .env.example file.<br />
 
 #### Available Scripts
 
@@ -37,5 +38,5 @@ The server will reload if you make any changes. <br />
 ## Postman link
 
 Here is the postman workspace link for all the available requests. <br />
-https://www.postman.com/gold-space-386125/workspace/file-management-system
+https://www.postman.com/gold-space-386125/workspace/school-management-system
 
