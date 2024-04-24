@@ -5,6 +5,8 @@ The application uses RestApi for authentication (signup, login). These requests 
 The application uses prisma ORM for interacting with MySql database.<br />
 You can find all the necessary env variables in the .env.example file.<br />
 
+#### The front-end is available at `https://github.com/ani-gevorgyan/school-management-system-web`
+
 #### Available Scripts
 
 In the project directory, you can run:
