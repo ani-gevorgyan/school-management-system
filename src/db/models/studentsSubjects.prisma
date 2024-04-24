@@ -1,0 +1,11 @@
+model StudentsSubjects {
+  id        String   @id @default(uuid())
+  student   Student
+  studentId String
+  subjectId String
+  subject   Subject
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([studentId, subjectId])
+}

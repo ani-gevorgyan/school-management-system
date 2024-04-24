@@ -1,0 +1,9 @@
+model Grade {
+  grade     String   
+  subjectId String
+  studentId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([studentId, subjectId], name: "gradeId")
+}

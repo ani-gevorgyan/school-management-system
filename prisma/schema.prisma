@@ -1,0 +1,82 @@
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String   @db.VarChar(100)
+  role      String   @db.VarChar(100)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+model Grade {
+  grade     String
+  subjectId String
+  studentId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Student   Student  @relation(fields: [studentId], references: [id])
+  Subject   Subject  @relation(fields: [subjectId], references: [id])
+
+  @@id([studentId, subjectId], name: "gradeId")
+}
+
+model Student {
+  id        String             @id @default(uuid())
+  firstName String             @db.VarChar(100)
+  lastName  String             @db.VarChar(100)
+  email     String             @unique
+  password  String             @db.VarChar(100)
+  grades    Grade[]
+  subjects  StudentsSubjects[]
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+}
+
+model StudentsSubjects {
+  id        String   @id @default(uuid())
+  student   Student  @relation(fields: [studentId], references: [id])
+  studentId String
+  subjectId String
+  subject   Subject  @relation(fields: [subjectId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([studentId, subjectId])
+}
+
+model Subject {
+  id          String             @id @default(uuid())
+  title       String             @unique
+  description String             @db.VarChar(100)
+  teacherId   String?
+  students    StudentsSubjects[]
+  grades      Grade[]
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  Teacher     Teacher?           @relation(fields: [teacherId], references: [id])
+}
+
+model Teacher {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  firstName String    @db.VarChar(100)
+  lastName  String    @db.VarChar(100)
+  password  String    @db.VarChar(100)
+  role      String    @db.VarChar(100)
+  subjects  Subject[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
